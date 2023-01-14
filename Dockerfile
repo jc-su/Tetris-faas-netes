@@ -19,8 +19,8 @@ RUN VERSION=$(git describe --all --exact-match `git rev-parse HEAD` | grep tags 
     && GIT_COMMIT=$(git rev-list -1 HEAD) \
     && GOOS=linux go build \
         --ldflags "-s -w \
-        -X github.com/openfaas/faas-netes/version.GitCommit=${GIT_COMMIT}\
-        -X github.com/openfaas/faas-netes/version.Version=${VERSION}" \
+        -X github.com/jc-su/Tetris-faas-netes/version.GitCommit=${GIT_COMMIT}\
+        -X github.com/jc-su/Tetris-faas-netes/version.Version=${VERSION}" \
         -a -installsuffix cgo -o faas-netes .
 
 FROM alpine:3.11 as ship
