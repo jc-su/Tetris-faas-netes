@@ -87,7 +87,7 @@ func createFuncInstance(funcName string, namespace string, funcPodConfig *gpuTyp
 	// }
 
 	funcDeployStatus.FuncSpec.Pod.Spec.Containers[0].VolumeMounts = []apiv1.VolumeMount{
-		apiv1.VolumeMount{Name: "serving-locks", MountPath: "/home/tank/lijie/serving_locks/"},
+		apiv1.VolumeMount{Name: "serving-locks", MountPath: "/run/lock/serving_lock/"},
 		// apiv1.VolumeMount{Name: "serving-memorys", MountPath: "/dev/shm/serving_memorys/"},
 		apiv1.VolumeMount{Name: "serving-models", MountPath: "/models/" + funcName},
 	}
@@ -96,9 +96,9 @@ func createFuncInstance(funcName string, namespace string, funcPodConfig *gpuTyp
 	host_path_type = "Directory"
 
 	funcDeployStatus.FuncSpec.Pod.Spec.Volumes = []apiv1.Volume{
-		apiv1.Volume{Name: "serving-locks", VolumeSource: apiv1.VolumeSource{HostPath: &apiv1.HostPathVolumeSource{Path: "/home/tank/lijie/serving_locks/", Type: &host_path_type}}},
+		apiv1.Volume{Name: "serving-locks", VolumeSource: apiv1.VolumeSource{HostPath: &apiv1.HostPathVolumeSource{Path: "/run/lock/serving_lock/", Type: &host_path_type}}},
 		// apiv1.Volume{Name: "serving-memorys", VolumeSource: apiv1.VolumeSource{HostPath: &apiv1.HostPathVolumeSource{Path: "/dev/shm/serving_memorys/", Type: &host_path_type}}},
-		apiv1.Volume{Name: "serving-models", VolumeSource: apiv1.VolumeSource{HostPath: &apiv1.HostPathVolumeSource{Path: "/home/tank/lijie/serving_models/" + funcName, Type: &host_path_type}}},
+		apiv1.Volume{Name: "serving-models", VolumeSource: apiv1.VolumeSource{HostPath: &apiv1.HostPathVolumeSource{Path: "/serving_models/" + funcName, Type: &host_path_type}}},
 	}
 
 	funcDeployStatus.FuncSpec.Pod.Spec.Containers[0].LivenessProbe = nil
